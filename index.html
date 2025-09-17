@@ -1,28 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>mariowstech's links</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mariowstech's website</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      background: #000;
+      position: relative;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      z-index: 10;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .card {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px 30px;
+      border-radius: 15px;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      transition: transform 0.2s ease, background 0.2s ease;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: tileDrop 0.8s ease forwards;
+    }
+
+    .card:nth-child(1) { animation-delay: 0.3s; }
+    .card:nth-child(2) { animation-delay: 0.6s; }
+    .card:nth-child(3) { animation-delay: 0.9s; }
+
+    .card:hover {
+      transform: translateY(-5px);
+      background: rgba(0, 0, 0, 0.75);
+    }
+
+    .profile-card .avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .info h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .info p {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .socials-card a {
+      color: white;
+      font-size: 1.5rem;
+      transition: color 0.2s;
+    }
+
+    .socials-card a:hover {
+      color: #87ceeb;
+    }
+
+    .os-card {
+      font-size: 1.2rem;
+      font-weight: 600;
+      gap: 10px;
+    }
+
+    .os-card img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .background {
+      position: absolute;
+      inset: 0;
+      background: url('images/clouds.png') center/cover no-repeat;
+      z-index: 0;
+      filter: blur(5px) brightness(0.9);
+    }
+
+    /* CRT overlay (scanlines + ghost glow) */
+    .background::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.35) 0px,
+        rgba(0, 0, 0, 0.35) 1px,
+        transparent 2px
+      );
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .background::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(255,0,0,0.08), transparent 40%),
+                  radial-gradient(circle at center, rgba(0,255,0,0.08), transparent 40%),
+                  radial-gradient(circle at center, rgba(0,0,255,0.08), transparent 40%);
+      mix-blend-mode: screen;
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Rolling bar */
+    .crt-sweep {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0,0,0,0.6) 50%,
+        transparent 100%
+      );
+      animation: roll 3s linear infinite;
+      mix-blend-mode: multiply;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    /* Animations */
+    @keyframes tileDrop {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes roll {
+      0%   { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="content">
-            <div class="header">
-                <div class="profile">
-                    <img src="https://avatars.githubusercontent.com/u/102176023?v=4" alt=".">
-                </div>
-                <h1>𝖒𝖆𝖗𝖎𝖔𝖜𝖘𝖙𝖊𝖈𝖍</h1>
-                <p>developer, tech enthusiast and car lover.</p>
-            </div>
-            <div class="links">
-                <a href="https://tiktok.com/@mariowstech"><img src="images/tik-tok.png"> TikTok</a>
-                <a href="https://youtube.com/@mariowstech"><img src="images/youtube.png"> YouTube</a>
-                <a href="https://github.com/mariowstech"><img src="images/github.png" > GitHub</a>
-                <a href="https://discord.gg/Qb9An23X4U"><img src="images/discord.png"> Discord</a>
-            </div>
-        </div>
+  <div class="container">
+    <div class="card profile-card">
+      <img src="https://avatars.githubusercontent.com/u/102176023?v=4" alt="profile" class="avatar">
+      <div class="info">
+        <h2>mariowstech</h2>
+        <p>developer and tech enthusiast</p>
+      </div>
     </div>
+
+    <div class="card socials-card">
+      <a href="https://github.com/mariowstech"><i class="fab fa-github"></i></a>
+      <a href="https://discord.gg/Qb9An23X4U"><i class="fab fa-discord"></i></a>
+      <a href="https://tiktok.com/@mariowstech"><i class="fab fa-tiktok"></i></a>
+      <a href="https://youtube.com/@mariowstech"><i class="fab fa-youtube"></i></a>
+    </div>
+
+    <div class="card os-card">
+      <img src="images/stars.png" alt="awesome stars right?">
+      <span>mariowOS</span>
+    </div>
+  </div>
+
+  <div class="background"></div>
+  <div class="crt-sweep"></div>
 </body>
 </html>
